@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum Sounds : int
 {
-    
+    STEPS
 }
 
 public class SoundManager : MonoBehaviour
@@ -14,86 +14,86 @@ public class SoundManager : MonoBehaviour
     public Camera cam;
     public AudioClip mainMenu;
 
-    public AudioClip[] clips;
+    public AudioClipListVariable clips;
+
+    private AudioSource jukebox;
 
     void Awake()
     {
         StaticManager.soundManager = this;
     }
 
-    void Start()
+    private void Start()
     {
-        
+        PoolManager.PreSpawn(audioDad, clips.clips.Count * 15, true);
     }
 
     public void PlaySoundAt(Vector3 pos, AudioClip clip)
     {
-        GameObject sound = Instantiate(audioDad, pos, Quaternion.identity);
-        sound.GetComponent<AudioSource>().PlayOneShot(clip);
-        Destroy(sound, clip.length + 0.1f);
+        Transform sound = PoolManager.SpawnWithClip(audioDad, pos, Quaternion.identity, clip);
+        AudioSource temp = sound.GetComponent<AudioSource>();
+        temp.Play();
     }
 
     public void PlaySoundAt(Vector3 pos, Sounds clip)
     {
-        GameObject sound = Instantiate(audioDad, pos, Quaternion.identity);
-        sound.GetComponent<AudioSource>().PlayOneShot(clips[(int)clip]);
-        Destroy(sound, clips[(int)clip].length + 0.1f);
+        Transform sound = PoolManager.SpawnWithClip(audioDad, pos, Quaternion.identity, clips[(int)clip]);
+        AudioSource temp = sound.GetComponent<AudioSource>();
+        temp.Play();
     }
 
     public void PlaySoundGlobal(AudioClip clip)
     {
-        GameObject sound = Instantiate(audioDad, cam.transform.position, Quaternion.identity, cam.transform);
-        sound.GetComponent<AudioSource>().PlayOneShot(clip);
-        Destroy(sound, clip.length + 0.1f);
+        Transform sound = PoolManager.SpawnWithClip(audioDad, cam.transform.position, Quaternion.identity, clip, cam.transform);
+        AudioSource temp = sound.GetComponent<AudioSource>();
+        temp.Play();
     }
 
     public void PlaySoundGlobal(Sounds clip)
     {
-        GameObject sound = Instantiate(audioDad, cam.transform.position, Quaternion.identity, cam.transform);
-        sound.GetComponent<AudioSource>().PlayOneShot(clips[(int)clip]);
-        Destroy(sound, clips[(int)clip].length + 0.1f);
+        Transform sound = PoolManager.SpawnWithClip(audioDad, cam.transform.position, Quaternion.identity, clips[(int)clip], cam.transform);
+        AudioSource temp = sound.GetComponent<AudioSource>();
+        temp.Play();
     }
 
     public void PlayMusic(AudioClip clip)
     {
-        if (!GameObject.Find("jukebox"))
+        if (jukebox == null)
         {
-            GameObject jukebox = Instantiate(audioDad, cam.transform.position, Quaternion.identity, cam.transform);
+            jukebox = PoolManager.SpawnWithClip(audioDad, cam.transform.position, Quaternion.identity, clip, cam.transform).GetComponent<AudioSource>();
             jukebox.gameObject.name = "jukebox";
-            jukebox.GetComponent<AudioSource>().clip = clip;
-            jukebox.GetComponent<AudioSource>().loop = true;
-            jukebox.GetComponent<AudioSource>().Play();
+            jukebox.loop = true;
+            jukebox.Play();
         }
         else
         {
-            GameObject.Find("jukebox").GetComponent<AudioSource>().clip = clip;
-            GameObject.Find("jukebox").GetComponent<AudioSource>().Play();
+            jukebox.clip = clip;
+            jukebox.Play();
         }
     }
 
     public void PlayMusic(Sounds clip)
     {
-        if (!GameObject.Find("jukebox"))
+        if (jukebox == null)
         {
-            GameObject jukebox = Instantiate(audioDad, cam.transform.position, Quaternion.identity, cam.transform);
+            jukebox = PoolManager.SpawnWithClip(audioDad, cam.transform.position, Quaternion.identity, clips[(int)clip], cam.transform).GetComponent<AudioSource>();
             jukebox.gameObject.name = "jukebox";
-            jukebox.GetComponent<AudioSource>().clip = clips[(int)clip];
-            jukebox.GetComponent<AudioSource>().loop = true;
-            jukebox.GetComponent<AudioSource>().Play();
+            jukebox.loop = true;
+            jukebox.Play();
         }
         else
         {
-            GameObject.Find("jukebox").GetComponent<AudioSource>().clip = clips[(int)clip];
-            GameObject.Find("jukebox").GetComponent<AudioSource>().Play();
+            jukebox.clip = clips[(int)clip];
+            jukebox.Play();
         }
     }
 
     public void StopMusic()
     {
-        if (GameObject.Find("jukebox"))
+        if (jukebox != null)
         {
-            GameObject.Find("jukebox").GetComponent<AudioSource>().Stop();
-            Destroy(GameObject.Find("jukebox"));
+            jukebox.Stop();
+            Destroy(jukebox.gameObject);
         }
     }
 }
