@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cow
-  m_Shader: {fileID: 4800000, guid: f34da9223cab9c847921a3c072d20fb2, type: 3}
+  m_Shader: {fileID: 4800000, guid: 45928cf6445cd04419cb44e14a899acb, type: 3}
   m_ShaderKeywords: _LIGHTCOLORFRESNEL_ON _USEFRESNEL_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,6 +39,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmissionMask:
+        m_Texture: {fileID: 2800000, guid: 20c1de688196ddb4e9b5dd68fe48e0be, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: f0e05c0443e29c14abca9c9e8b32d7d8, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -48,8 +52,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: cb42cd111d036b24db8d9195aac7b365, type: 3}
+        m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -69,9 +73,11 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _GlowDirectionPower: 1.5
+    - _GlowIntensity: 5
     - _Metallic: 0
     - _Mode: 0
-    - _NormalPower: 0.527589
+    - _NormalPower: 0.5
     - _OcclusionStrength: 1
     - _OutlinePower: 0.01
     - _Parallax: 0.02
@@ -88,7 +94,8 @@ Material:
     - _Color: {r: 0.8018868, g: 0.59670454, b: 0.4349858, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 0.6078432, g: 0.9734884, b: 1, a: 1}
+    - _GlowColor: {r: 1, g: 0, b: 0, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ShadowColor: {r: 0.3424261, g: 0.3530363, b: 0.4245283, a: 1}
+    - _ShadowColor: {r: 0.3962264, g: 0.39156878, b: 0.37566748, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
