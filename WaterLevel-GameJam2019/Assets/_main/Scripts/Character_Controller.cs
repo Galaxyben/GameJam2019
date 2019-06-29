@@ -59,7 +59,7 @@ public class Character_Controller : MonoBehaviour
         
     float elapsed = 0.0f;
     
-    Vector3 originalCamPos = Camera.main.transform.position;
+    Vector3 originalCamPos = camara.transform.localPosition;
     
     while (elapsed < shakeDuration) {
         
@@ -74,12 +74,12 @@ public class Character_Controller : MonoBehaviour
         x *= shakeAmount * damper;
         y *= shakeAmount * damper;
         
-        Camera.main.transform.position = new Vector3(x, y, originalCamPos.z);
+        camara.transform.localPosition = new Vector3(x, y, originalCamPos.z);
             
         yield return null;
     }
     
-    Camera.main.transform.position = originalCamPos;
+    camara.transform.position = originalCamPos;
 }
 
     private void ProcessInput()
