@@ -44,7 +44,7 @@ public class CowBehaviour : MonoBehaviour
 
     private void FollowPlayer()
     {
-        if (willFollowPlayer)
+        if (willFollowPlayer && player != null)
         {
             transform.LookAt(player.transform);
             if (Vector3.Distance(transform.position, player.transform.position) > followDistanceLimit)
