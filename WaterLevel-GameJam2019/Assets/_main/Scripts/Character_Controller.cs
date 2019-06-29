@@ -21,7 +21,6 @@ public class Character_Controller : MonoBehaviour
 	
 	// Amplitude of the shake. A larger value shakes the camera harder.
 	public float shakeAmount = 0.7f;
-    public float decreaseFactor = 1.0f;
 
     private Player player;
     private Vector3 moveVector;
@@ -56,6 +55,33 @@ public class Character_Controller : MonoBehaviour
         isRuning = player.GetButton("Running");
     }
 
+    IEnumerator Shake() {
+        
+    float elapsed = 0.0f;
+    
+    Vector3 originalCamPos = Camera.main.transform.position;
+    
+    while (elapsed < shakeDuration) {
+        
+        elapsed += Time.deltaTime;          
+        
+        float percentComplete = elapsed / shakeDuration;         
+        float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
+        
+        // map value to [-1, 1]
+        float x = Random.value * 2.0f - 1.0f;
+        float y = Random.value * 2.0f - 1.0f;
+        x *= shakeAmount * damper;
+        y *= shakeAmount * damper;
+        
+        Camera.main.transform.position = new Vector3(x, y, originalCamPos.z);
+            
+        yield return null;
+    }
+    
+    Camera.main.transform.position = originalCamPos;
+}
+
     private void ProcessInput()
     {   
         if(isRuning)
@@ -66,17 +92,6 @@ public class Character_Controller : MonoBehaviour
         {
             moveVector *= moveSpeed;
             rigi.velocity = (toggleRuning ? ((transform.right * moveVector.x) + (transform.forward * moveVector.z) + (transform.up * rigi.velocity.y)) * 2.0f : (transform.right * moveVector.x) + (transform.forward * moveVector.z) + (transform.up * rigi.velocity.y));
-            if (shakeDuration > 0)
-            {
-                camara.transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
-                
-                shakeDuration -= Time.deltaTime * decreaseFactor;
-            }
-            else
-            {
-                shakeDuration = 0.5f;
-                camara.transform.localPosition = originalPos;
-            }
         }
         if(moveVector.x == 0.0f && moveVector.z == 0.0f)
         {
