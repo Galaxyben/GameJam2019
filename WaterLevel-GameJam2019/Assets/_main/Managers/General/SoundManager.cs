@@ -5,7 +5,9 @@ using UnityEngine;
 
 public enum Sounds : int
 {
-    STEPS
+    STEP_DIRT,
+    STEP_WHEAT,
+    STEP_GRASS
 }
 
 public class SoundManager : MonoBehaviour
