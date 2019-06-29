@@ -37,7 +37,7 @@ public class Character_Controller : MonoBehaviour
         moveVector.z = player.GetAxis("Move Vertical");
         viewVector.x = player.GetAxis("View Horizontal");
         viewVector.y = player.GetAxis("View Vertical");
-        isRuning = player.GetButton("Correr");
+        isRuning = player.GetButton("Running");
     }
 
     private void ProcessInput()
@@ -49,7 +49,7 @@ public class Character_Controller : MonoBehaviour
         }
         if(moveVector.x == 0.0f && moveVector.z == 0.0f)
         {
-            rigi.velocity = Vector3.zero;
+            rigi.velocity = new Vector3(0.0f, rigi.velocity.y, 0.0f);
         }
         Vector3 tempMove = new Vector3();
         tempMove.x = Mathf.Clamp(viewVector.x, velocidadRotacionMin, velocidadRotacionMax);
