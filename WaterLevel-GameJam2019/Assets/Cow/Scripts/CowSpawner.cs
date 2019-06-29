@@ -12,27 +12,36 @@ public class CowSpawner : MonoBehaviour
     [Range(0,1)]
     public float randomSpawnChance;
     public float randomSpawnDelay;
-    private float currentTime;
+    public float currentTime;
     private GameObject player;
 
     // TEMP
     [Header("TEMP")]
     public GameObject TEMP_SoundDebugger;
 
-    public void EventSpawn(Vector3 _position)
+    public void EventSpawn(Vector3 _position, float _speed, float _lifetime, float _followDistanceLimit)
     {
-        SpawnCow(_position);
+        Debug.Log("Spawned Cow");
+        SpawnCow(_position, _speed, _lifetime, _followDistanceLimit);
+    }
+
+    public void SetCanSpawnRandom(bool _bool){
+        canSpawnRandom = _bool;
+        currentTime = randomSpawnDelay;
     }
 
     public void RandomSpawn()
     {
         if (currentTime <= 0)
         {
-            if (Random.Range(0,1) > randomSpawnChance)
+            float randomChance = Random.Range(0f,1f);
+            Debug.Log("Random: " + randomChance);
+            if (randomChance >= 1-randomSpawnChance)
             {
-                float spawnDistance = Random.Range(nearestLimit + farthestLimit / 2, nearestLimit + farthestLimit);
-                Vector3 spawnPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - spawnDistance);
-                SpawnCow(spawnPosition);
+                Debug.Log("Spawned Cow");
+                float spawnDistance = Random.Range(nearestLimit, farthestLimit);
+                Vector3 spawnPosition = player.transform.position - player.transform.forward * spawnDistance;
+                SpawnCow(spawnPosition, Random.Range(1f, 5f), Random.Range(1f, 5f), Random.Range(1f, 5f));
             }
             currentTime = randomSpawnDelay;
         }
@@ -42,29 +51,31 @@ public class CowSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnCow(Vector3 _position)
+    private void SpawnCow(Vector3 _position, float _speed, float _lifetime, float _followDistanceLimit)
     {
-        GameObject moo = Instantiate(TEMP_SoundDebugger);
+        GameObject moo = Instantiate(TEMP_SoundDebugger, _position, Quaternion.identity);
+        moo.GetComponent<CowBehaviour>().SetCowStats(_speed, _lifetime, _followDistanceLimit);
         float _distance = Vector3.Distance(player.transform.position, _position);
 
         // TEMP Instantiate "Sound"
         if (_distance < nearestLimit)
         {
-            TEMP_SoundDebugger.name = "TEMP_Cow_" + cowSFX[0].name;
+            moo.name = "TEMP_Cow_" + cowSFX[0].name;
         }
         else if (_distance >= nearestLimit && _distance <= farthestLimit)
         {
-            TEMP_SoundDebugger.name = "TEMP_Cow_" + cowSFX[1].name;
+            moo.name = "TEMP_Cow_" + cowSFX[1].name;
         }
         else if (_distance > farthestLimit)
         {
-            TEMP_SoundDebugger.name = "TEMP_Cow_" + cowSFX[2].name;
+            moo.name = "TEMP_Cow_" + cowSFX[2].name;
         }
     }
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        currentTime = randomSpawnDelay;
     }
 
     void Update()

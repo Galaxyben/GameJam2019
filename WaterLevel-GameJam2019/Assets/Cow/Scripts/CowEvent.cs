@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class CowEvent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public Transform spawnPosition;
+    public float _cowSpeed;
+    public float _cowLifetime;
+    public float _cowFollowDistanceLimit;
+
+    private GameObject cowManager;
+
+    private void OnTriggerEnter(Collider _col){
+        if (_col.gameObject.CompareTag("Player")){
+            cowManager.GetComponent<CowSpawner>().EventSpawn(spawnPosition.position, _cowSpeed, _cowLifetime, _cowFollowDistanceLimit);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        cowManager = GameObject.FindGameObjectWithTag("CowManager");
     }
 }
