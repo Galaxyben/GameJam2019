@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4fc462fb33e62a24b86903989f523595
+guid: 79f4a61ef27488248b6aad1421778e7b
 labels:
 - Input
 - Joysticks
@@ -20,4 +20,7 @@ labels:
 - RawInput
 folderAsset: yes
 DefaultImporter:
+  externalObjects: {}
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
