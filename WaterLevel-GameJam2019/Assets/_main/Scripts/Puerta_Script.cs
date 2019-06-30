@@ -15,6 +15,7 @@ public class Puerta_Script : Objetos_Script
     private void Start()
     {
         anim = GetComponent<Animator>();
+        transform.position = closedPosition;
     }
 
     void Update()
