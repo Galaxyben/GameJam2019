@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Rewired;
 
 public enum Items
@@ -228,6 +229,12 @@ public class Character_Controller : MonoBehaviour
         //Debug.Break();
 
         iTween.RotateAdd(gameObject, rotDir * teta, timeToTurn);
+
+        Invoke("RestartScene", 1.0f);
+    }
+
+    private void RestartScene(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnTriggerEnter(Collider other)
