@@ -17,7 +17,7 @@ public class Character_Controller : MonoBehaviour
     public bool debugMode = false;
     public GameObject interatuable;
     public Rigidbody rigi;
-    public Camera camara;
+    public Transform camara;
     public int playerId = 0;
     public float moveSpeed = 3.0f;
     public float velocidadRotacionMax = 3.0f;
@@ -51,8 +51,6 @@ public class Character_Controller : MonoBehaviour
     private void Awake() {
         player = ReInput.players.GetPlayer(playerId);
         rigi = gameObject.GetComponent<Rigidbody>();
-        Screen.lockCursor = true;
-        Cursor.visible = false;
         originalPos = camara.transform.localPosition;
     }
 
@@ -60,8 +58,11 @@ public class Character_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInput();
-        ProcessInput();
+        if(StaticManager.gameStateManager.currentState == GameState.GAMEPLAY)
+        {
+            GetInput();
+            ProcessInput();
+        }
     }
 
     private void GetInput()

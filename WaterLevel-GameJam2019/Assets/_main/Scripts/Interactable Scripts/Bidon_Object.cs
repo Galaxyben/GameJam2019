@@ -12,7 +12,7 @@ public class Bidon_Object : Objetos_Script
         {
             player.actualState = Items.GASOLINA;
             Destroy(this.gameObject, 0.4f);
-            print("Conseguiste llaves!");
+            print("Conseguiste Bidón!");
         }
     }
 
