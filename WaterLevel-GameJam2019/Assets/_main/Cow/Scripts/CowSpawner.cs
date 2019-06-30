@@ -58,20 +58,6 @@ public class CowSpawner : MonoBehaviour
         cow.SetCowStats(_speed, _lifetime, _followDistanceLimit);
         float _distance = Vector3.Distance(player.transform.position, _position);
         cow.anim.SetTrigger("Spawn");
-
-        // TEMP Instantiate "Sound"
-        if (_distance < nearestLimit)
-        {
-            moo.name = "TEMP_Cow_" + cowSFX[0].name;
-        }
-        else if (_distance >= nearestLimit && _distance <= farthestLimit)
-        {
-            moo.name = "TEMP_Cow_" + cowSFX[1].name;
-        }
-        else if (_distance > farthestLimit)
-        {
-            moo.name = "TEMP_Cow_" + cowSFX[2].name;
-        }
     }
 
     void Start()

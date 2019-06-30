@@ -136,3 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPosition: {fileID: 622892020}
+  _cowSpeed: 0
+  _cowLifetime: 0
+  _cowFollowDistanceLimit: 0
