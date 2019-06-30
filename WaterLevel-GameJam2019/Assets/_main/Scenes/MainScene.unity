@@ -30904,6 +30904,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: b14017fbcedb719468fd1200b1547258,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e40acf2570aaea4b8f90ca7c311f48d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14017fbcedb719468fd1200b1547258, type: 3}
 --- !u!1 &944534470
@@ -33675,6 +33680,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.9635398
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: b14017fbcedb719468fd1200b1547258,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e40acf2570aaea4b8f90ca7c311f48d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14017fbcedb719468fd1200b1547258, type: 3}
 --- !u!4 &1137865621 stripped
@@ -46637,6 +46647,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: b14017fbcedb719468fd1200b1547258,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e40acf2570aaea4b8f90ca7c311f48d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14017fbcedb719468fd1200b1547258, type: 3}
 --- !u!1 &1571236115
@@ -47956,6 +47971,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: b14017fbcedb719468fd1200b1547258,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e40acf2570aaea4b8f90ca7c311f48d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14017fbcedb719468fd1200b1547258, type: 3}
 --- !u!1 &1646698917
