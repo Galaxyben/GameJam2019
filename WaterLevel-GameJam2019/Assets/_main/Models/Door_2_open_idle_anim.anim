@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Door_3_anim
+  m_Name: Door_2_open_idle_anim
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -32.044613, y: -0.7576449, z: -18.224838}
+        value: {x: -17.83, y: -0.76, z: -17.74}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -75,7 +75,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -32.044613
+        value: -17.83
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -94,7 +94,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.7576449
+        value: -0.76
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -113,7 +113,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -18.224838
+        value: -17.74
         inSlope: 0
         outSlope: 0
         tangentMode: 136
