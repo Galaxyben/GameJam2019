@@ -3,9 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 
-public class Character_Controller : MonoBehaviour
+public enum Items
 {
+    INICIO,
+    LLAVERO,
+    GASOLINA,
+    TERMINAR,
+};
+
+public class Character_Controller : MonoBehaviour
+{   
+    public Items actualState;
     public bool debugMode = false;
+    public GameObject interatuable;
     public Rigidbody rigi;
     public Camera camara;
     public int playerId = 0;
@@ -104,7 +114,21 @@ public class Character_Controller : MonoBehaviour
         if(player.GetButtonTimedPress("Iteractuable", 0.2f))
         {
             print("Estoy interactuando");
+            if(interatuable != null)
+            {
+                interatuable.SendMessage("CanInteract", actualState, SendMessageOptions.DontRequireReceiver);
+            }
         }
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        interatuable = other.gameObject;
+    }
+
+    private void OnTriggerExit(Collider other) 
+    {
+        interatuable = null;
     }
 
     void HeadBob()
