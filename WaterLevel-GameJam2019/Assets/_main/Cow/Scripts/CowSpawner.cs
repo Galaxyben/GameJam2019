@@ -40,7 +40,7 @@ public class CowSpawner : MonoBehaviour
             {
                 Debug.Log("Spawned Cow");
                 float spawnDistance = Random.Range(nearestLimit, farthestLimit);
-                Vector3 spawnPosition = player.transform.position - player.transform.forward * spawnDistance;
+                Vector3 spawnPosition = player.transform.position - player.transform.forward * spawnDistance + Vector3.up*0.48f;
                 SpawnCow(spawnPosition, Random.Range(1f, 5f), Random.Range(1f, 5f), Random.Range(1f, 5f));
             }
             currentTime = randomSpawnDelay;

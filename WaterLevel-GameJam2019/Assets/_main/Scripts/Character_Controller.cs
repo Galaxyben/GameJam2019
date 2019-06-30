@@ -161,7 +161,10 @@ public class Character_Controller : MonoBehaviour
 
     public void Die(Vector3 _cowPos)
     {
-        Debug.Log("Got killed");
+        if (isDead)
+            return;
+
+        rigi.constraints = RigidbodyConstraints.FreezeAll;
         isDead = true;
         anim.SetTrigger("GetKilled");
 
