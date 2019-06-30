@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BarnWhite
+  m_Name: Windowa
   m_Shader: {fileID: 4800000, guid: b61b245532170b345b1cd8a20d995b81, type: 3}
   m_ShaderKeywords: _LIGHTCOLORFRESNEL_ON
   m_LightmapFlags: 4
