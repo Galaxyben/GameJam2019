@@ -54,8 +54,10 @@ public class CowSpawner : MonoBehaviour
     private void SpawnCow(Vector3 _position, float _speed, float _lifetime, float _followDistanceLimit)
     {
         GameObject moo = Instantiate(TEMP_SoundDebugger, _position, Quaternion.identity);
-        moo.GetComponent<CowBehaviour>().SetCowStats(_speed, _lifetime, _followDistanceLimit);
+        CowBehaviour cow = moo.GetComponent<CowBehaviour>();
+        cow.SetCowStats(_speed, _lifetime, _followDistanceLimit);
         float _distance = Vector3.Distance(player.transform.position, _position);
+        cow.anim.SetTrigger("Spawn");
 
         // TEMP Instantiate "Sound"
         if (_distance < nearestLimit)

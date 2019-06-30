@@ -5,14 +5,18 @@ using UnityEngine.AI;
 
 public class CowBehaviour : MonoBehaviour
 {
+    public Animator anim;
     public NavMeshAgent agent;
     public float followSpeed;
     public float followDistanceLimit;
     public float lifetime;
+    public bool canMove = false;
 
     private GameObject player;
 
     private bool willFollowPlayer = true;
+
+    private bool goalAchieved = false;
 
     public void SetCowStats(float _speed, float _lifetime, float _followDistanceLimit)
     {
@@ -44,21 +48,27 @@ public class CowBehaviour : MonoBehaviour
 
     private void FollowPlayer()
     {
-        if (willFollowPlayer && player != null)
+        if (willFollowPlayer && player != null && canMove)
         {
-            transform.LookAt(player.transform);
+            anim.SetBool("Walking", true);
+            transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
             if (Vector3.Distance(transform.position, player.transform.position) > followDistanceLimit)
             {
                 agent.destination = player.transform.position;
             }
             else
+            {
                 KillPlayer();
+            }
+
         }
     }
 
     private void KillPlayer()
     {
-        Destroy(player);
+        canMove = false;
+        anim.SetTrigger("Attack");
+        player.GetComponent<Character_Controller>().Die(transform.position);
     }
 
     private void Start()

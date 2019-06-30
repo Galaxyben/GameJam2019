@@ -12,9 +12,10 @@ public enum Items
 };
 
 public class Character_Controller : MonoBehaviour
-{   
+{
     public Items actualState;
     public bool debugMode = false;
+    public Animator anim;
     public GameObject interatuable;
     public Rigidbody rigi;
     public Transform camara;
@@ -23,6 +24,8 @@ public class Character_Controller : MonoBehaviour
     public float velocidadRotacionMax = 3.0f;
     public float velocidadRotacionMin = -3.0f;
 
+    [Header("Animation settings")]
+    public float timeToTurn = 0.433f;
     public float headBobAmplitude = 0.5f;
     public float headBobSpeed = 1.0f;
 
@@ -34,7 +37,7 @@ public class Character_Controller : MonoBehaviour
 
     // How long the object should shake for.
 	public float shakeDuration = 0.5f;
-	
+
 	// Amplitude of the shake. A larger value shakes the camera harder.
 	public float shakeAmount = 0.7f;
     public float decreaseFactor = 1.0f;
@@ -44,9 +47,11 @@ public class Character_Controller : MonoBehaviour
     private Vector3 viewVector;
     private Quaternion characterRot;
     private Quaternion cameraRot;
+    private float timeOfDeath;
     private bool isRuning = false;
     private bool isPause = false;
     bool toggleRuning;
+    bool isDead = false;
 
     private void Awake() {
         player = ReInput.players.GetPlayer(playerId);
@@ -58,7 +63,7 @@ public class Character_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(StaticManager.gameStateManager.currentState == GameState.GAMEPLAY)
+        if(StaticManager.gameStateManager.currentState == GameState.GAMEPLAY && !isDead)
         {
             GetInput();
             ProcessInput();
@@ -77,6 +82,8 @@ public class Character_Controller : MonoBehaviour
 
     private void ProcessInput()
     {
+
+
         if(isRuning)
         {
             toggleRuning = true;
@@ -121,7 +128,7 @@ public class Character_Controller : MonoBehaviour
         tempMove.Normalize();
         transform.Rotate(0.0f, tempMove.x , 0.0f);
         camara.transform.Rotate(tempMove.y, 0.0f, 0.0f);
-        if(player.GetButtonTimedPress("Iteractuable", 0.2f))
+        if(player.GetButton("Iteractuable"))
         {
             print("Estoy interactuando");
             if(interatuable != null)
@@ -129,14 +136,55 @@ public class Character_Controller : MonoBehaviour
                 interatuable.SendMessage("CanInteract", actualState, SendMessageOptions.DontRequireReceiver);
             }
         }
+        else if(player.GetButtonUp("Iteractuable"))
+        {
+            if(interatuable != null)
+            {
+                interatuable.SendMessage("CanNotInteract", SendMessageOptions.DontRequireReceiver);
+            }
+        }
     }
 
-    private void OnTriggerEnter(Collider other) 
+    void RotateTowardsCow()
+    {
+        /*float t = 1-((timeOfDeath + timeToTurn - Time.time)/timeToTurn);
+        Quaternion.Lerp(onDeadRotation, targetRotation, t);*/
+    }
+
+    public void Die(Vector3 _cowPos)
+    {
+        Debug.Log("Got killed");
+        isDead = true;
+        anim.SetTrigger("GetKilled");
+
+        //transform.LookAt(new Vector3(_cowPos.x, transform.position.y, _cowPos.z));
+
+        //Calculating rot
+        Vector3 targetDir = _cowPos - transform.position;
+        float teta = Vector3.Angle(targetDir, transform.forward);
+
+        Debug.Log(teta);
+        Vector3 rotDir;
+
+        float product1 = Vector3.Dot(targetDir, transform.right);
+
+        if (product1 > 0)
+            rotDir = Vector3.up;
+        else
+            rotDir = Vector3.down;
+
+        Debug.Log("Teta: " + teta + " angle: " + rotDir);
+        //Debug.Break();
+
+        iTween.RotateAdd(gameObject, rotDir * teta, timeToTurn);
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         interatuable = other.gameObject;
     }
 
-    private void OnTriggerExit(Collider other) 
+    private void OnTriggerExit(Collider other)
     {
         interatuable = null;
     }

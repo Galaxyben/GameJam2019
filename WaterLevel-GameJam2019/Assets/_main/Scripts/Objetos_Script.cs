@@ -16,10 +16,12 @@ public class Objetos_Script : MonoBehaviour
 
     public virtual void CanInteract(Items _estado)
     {
-        if(dataCompare == _estado)
-        {
-            isActivated = true;
-        }
+        isActivated = dataCompare == _estado;
+    }
+
+    public virtual void CanNotInteract()
+    {
+        isActivated = false;
     }
 
 }

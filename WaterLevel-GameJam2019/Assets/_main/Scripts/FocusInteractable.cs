@@ -8,16 +8,18 @@ public class FocusInteractable : MonoBehaviour
 
     private void OnTriggerEnter(Collider _col){
         if (_col.CompareTag("Interactable")){
-            for (int i = 0; i < _col.GetComponent<MeshRenderer>().materials.Length; i++){
-                _col.GetComponent<MeshRenderer>().materials[i].SetFloat("_OutlineGlow", glowAmmount);
+            MeshRenderer temp = _col.GetComponent<MeshRenderer>();
+            for (int i = 0; i < temp.materials.Length; i++){
+                temp.materials[i].SetFloat("_OutlineGlow", glowAmmount);
             }
         }
     }
 
     private void OnTriggerExit(Collider _col){
         if (_col.CompareTag("Interactable")){
-            for (int i = 0; i < _col.GetComponent<MeshRenderer>().materials.Length; i++){
-                _col.GetComponent<MeshRenderer>().materials[i].SetFloat("_OutlineGlow", 0.0f);
+            MeshRenderer temp = _col.GetComponent<MeshRenderer>();
+            for (int i = 0; i < temp.materials.Length; i++){
+                temp.materials[i].SetFloat("_OutlineGlow", 0.0f);
             } 
         }
     }
