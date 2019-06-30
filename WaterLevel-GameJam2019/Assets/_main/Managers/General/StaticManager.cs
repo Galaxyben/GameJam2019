@@ -8,4 +8,5 @@ public class StaticManager : MonoBehaviour
     public static SoundManager soundManager;
     public static InputManager inputManager;
     public static GameStateManager gameStateManager;
+    public static LightManager lightManager;
 }

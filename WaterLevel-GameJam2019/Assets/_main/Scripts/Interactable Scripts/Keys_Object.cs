@@ -2,22 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Candado_Script : Objetos_Script
+public class Keys_Object : Objetos_Script
 {
-    public Animator door;
-
-    private void Start()
-    {
-        
-    }
+    public Character_Controller player;
 
     void Update()
     {
         if (isActivated)
         {
-            door.SetBool("Open", true);
-            Destroy(this.gameObject, 0.3f);
-            print("Abrete sesamo!");
+            player.actualState = Items.LLAVERO;
+            Destroy(this.gameObject, 0.4f);
+            print("Conseguiste llaves!");
         }
     }
 

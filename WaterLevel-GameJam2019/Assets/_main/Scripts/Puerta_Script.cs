@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class Puerta_Script : Objetos_Script
 {
+    public Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     void Update()
     {
         if(isActivated)
         {
-            print("Hola pepe, ABRETE SESAMO");
+            anim.SetBool("Open", true);
+            print("Abrete sesamo!");
         }
     }
 
