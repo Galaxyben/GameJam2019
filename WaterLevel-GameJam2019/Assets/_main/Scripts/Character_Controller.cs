@@ -18,7 +18,6 @@ public class Character_Controller : MonoBehaviour
     public Animator anim;
     public GameObject interatuable;
     public Rigidbody rigi;
-    public Transform camara;
     public int playerId = 0;
     public float moveSpeed = 3.0f;
     public float velocidadRotacionMax = 3.0f;
@@ -33,6 +32,7 @@ public class Character_Controller : MonoBehaviour
     private float headBobT;
     private int headBobEndState = 0;
 
+    public Transform cameraStand;
     Vector3 originalPos;
 
     // How long the object should shake for.
@@ -56,14 +56,14 @@ public class Character_Controller : MonoBehaviour
     private void Awake() {
         player = ReInput.players.GetPlayer(playerId);
         rigi = gameObject.GetComponent<Rigidbody>();
-        originalPos = camara.transform.localPosition;
+        originalPos = cameraStand.localPosition;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if(StaticManager.gameStateManager.currentState == GameState.GAMEPLAY && !isDead)
+        if(!isDead)
         {
             GetInput();
             ProcessInput();
@@ -72,17 +72,21 @@ public class Character_Controller : MonoBehaviour
 
     private void GetInput()
     {
-        moveVector.x = player.GetAxis("Move Horizontal");
-        moveVector.z = player.GetAxis("Move Vertical");
-        viewVector.x = player.GetAxis("View Horizontal");
-        viewVector.y = player.GetAxis("View Vertical");
-        isRuning = player.GetButton("Running");
+        if(StaticManager.gameStateManager.currentState == GameState.GAMEPLAY)
+        {
+            moveVector.x = player.GetAxis("Move Horizontal");
+            moveVector.z = player.GetAxis("Move Vertical");
+
+            viewVector.x = player.GetAxis("View Horizontal");
+            viewVector.y = player.GetAxis("View Vertical");
+            isRuning = player.GetButton("Running");
+        }
+        
         isPause = player.GetButtonDown("Pause");
     }
 
     private void ProcessInput()
     {
-
 
         if(isRuning)
         {
@@ -94,23 +98,25 @@ public class Character_Controller : MonoBehaviour
                 StaticManager.gameStateManager.SetPause();
             else if(StaticManager.gameStateManager.currentState == GameState.PAUSE)
                 StaticManager.gameStateManager.SetPlay();
+
+            Debug.Log("gamestate: " + StaticManager.gameStateManager.currentState);
         }
         if(moveVector.x != 0.0f || moveVector.z != 0.0f)
         {
 
             moveVector *= moveSpeed;
-            rigi.velocity = ((camara.transform.right * moveVector.x) + (Vector3.Cross(camara.transform.right, Vector3.up) * moveVector.z) + (Vector3.up * rigi.velocity.y)) * (toggleRuning ? 2.0f : 1.0f);
-            if (shakeDuration > 0)
+            rigi.velocity = ((cameraStand.transform.right * moveVector.x) + (Vector3.Cross(cameraStand.transform.right, Vector3.up) * moveVector.z) + (Vector3.up * rigi.velocity.y)) * (toggleRuning ? 2.0f : 1.0f);
+            /*if (shakeDuration > 0)
             {
-                camara.transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+                cameraStand.transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 
                 shakeDuration -= Time.deltaTime * decreaseFactor;
             }
             else
             {
                 shakeDuration = 0.5f;
-                camara.transform.localPosition = originalPos;
-            }
+                cameraStand.transform.localPosition = originalPos;
+            }*/
 
             HeadBob();
         }
@@ -122,12 +128,14 @@ public class Character_Controller : MonoBehaviour
         {
             rigi.velocity = new Vector3(0.0f, rigi.velocity.y, 0.0f);
             toggleRuning = false;
-            camara.transform.localPosition = originalPos;
+            cameraStand.transform.localPosition = originalPos;
         }
+
         Vector3 tempMove = new Vector3(viewVector.x, viewVector.y, 0f);
         tempMove.Normalize();
         transform.Rotate(0.0f, tempMove.x , 0.0f);
-        camara.transform.Rotate(tempMove.y, 0.0f, 0.0f);
+        cameraStand.transform.Rotate(tempMove.y, 0.0f, 0.0f);
+
         if(player.GetButton("Iteractuable"))
         {
             print("Estoy interactuando");
@@ -191,18 +199,18 @@ public class Character_Controller : MonoBehaviour
 
     void HeadBob()
     {
-        camara.transform.localPosition = originalPos + Vector3.up * Mathf.Sin(headBobT * moveSpeed * headBobSpeed) * headBobAmplitude;
+        cameraStand.transform.localPosition = originalPos + Vector3.up * Mathf.Sin(headBobT * moveSpeed * headBobSpeed) * headBobAmplitude;
 
         headBobT += Time.deltaTime;
     }
 
     void StopHeadBob() //Esta funcion es llamada cuando el jugador no se esta moviendo
     {
-        camara.transform.localPosition = Vector3.up * Mathf.Lerp(camara.transform.position.y, originalPos.y, 0.8f);
+        cameraStand.transform.localPosition = Vector3.up * Mathf.Lerp(cameraStand.transform.position.y, originalPos.y, 0.8f);
 
-        if(Mathf.Abs(camara.transform.position.y - originalPos.y) <= 0.05f)
+        if(Mathf.Abs(cameraStand.transform.position.y - originalPos.y) <= 0.05f)
         {
-            camara.transform.localPosition = originalPos;
+            cameraStand.transform.localPosition = originalPos;
         }
     }
 }

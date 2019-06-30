@@ -44,6 +44,7 @@ public class GameStateManager : MonoBehaviour
 
     public void SetPlay()
     {
+        Debug.Log("Set play");
         currentState = GameState.GAMEPLAY;
         volume.profile = baseProfile;
         canvasPauseMenu.SetActive(false);
