@@ -1,6 +1,6 @@
 //Maya ASCII 2018ff08 scene
 //Name: vaca anim corriendo_V3.ma
-//Last modified: Sat, Jun 29, 2019 06:03:03 PM
+//Last modified: Sat, Jun 29, 2019 06:06:22 PM
 //Codeset: 1252
 requires maya "2018ff08";
 requires -nodeType "gameFbxExporter" "gameFbxExporter" "1.0";
@@ -8314,8 +8314,10 @@ createNode gameFbxExporter -n "gameExporterPreset2";
 	setAttr ".spt" 2;
 	setAttr ".ic" no;
 	setAttr ".ebm" yes;
+	setAttr ".ft" 1;
 	setAttr ".fv" -type "string" "FBX201800";
 	setAttr ".exp" -type "string" "C:/Users/Alumno/Documents/GitHub/GameJam2019/Extras/Animaciones";
+	setAttr ".exf" -type "string" "Running ASCII_V2";
 createNode gameFbxExporter -n "gameExporterPreset3";
 	rename -uid "EB8FD035-4222-FF47-8BA8-7EA8DEFF2B45";
 	setAttr ".pn" -type "string" "TE Anim Default";
