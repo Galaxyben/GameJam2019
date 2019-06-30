@@ -13,6 +13,7 @@ public class MainMenuManager : MonoBehaviour
 
     public GameObject canvasMenu;
     public Button firstSelected;
+    public Button creditsBack;
 
     CursorLockMode cursorLock;
 
@@ -25,12 +26,14 @@ public class MainMenuManager : MonoBehaviour
     {
         cam.target = posMainMenuCam.gameObject;
         creditsDoor.SetBool("Open", false);
+        firstSelected.Select();
     }
 
     public void FollowCredits()
     {
         cam.target = posCreditsCam.gameObject;
         creditsDoor.SetBool("Open", true);
+        creditsBack.Select();
     }
 
     public void StartGame()
