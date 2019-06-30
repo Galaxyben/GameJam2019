@@ -131,12 +131,19 @@ public class Character_Controller : MonoBehaviour
         tempMove.Normalize();
         transform.Rotate(0.0f, tempMove.x , 0.0f);
         camara.transform.Rotate(tempMove.y, 0.0f, 0.0f);
-        if(player.GetButtonTimedPress("Iteractuable", 0.2f))
+        if(player.GetButton("Iteractuable"))
         {
             print("Estoy interactuando");
             if(interatuable != null)
             {
                 interatuable.SendMessage("CanInteract", actualState, SendMessageOptions.DontRequireReceiver);
+            }
+        }
+        else if(player.GetButtonUp("Iteractuable"))
+        {
+            if(interatuable != null)
+            {
+                interatuable.SendMessage("CanNotInteract", SendMessageOptions.DontRequireReceiver);
             }
         }
     }
