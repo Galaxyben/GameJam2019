@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 262cd411b5aa21149b90de93ce058e70, type: 3}
   m_Name: MainList
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   clips:
   - {fileID: 8300000, guid: 8de9804ad5448f44da0d81ad29941845, type: 3}
   - {fileID: 8300000, guid: 1c2904950e47bd64896d26d3f6897dfe, type: 3}
@@ -22,4 +22,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a18dbc7ab690e05489659a004a28e7ce, type: 3}
   - {fileID: 8300000, guid: 2b800db03a3b17747af5f2928753d5f3, type: 3}
   - {fileID: 8300000, guid: 383ec910e6b1b8e4b8a7c39ae87b1ad2, type: 3}
-  groupSizes: 010000000100000001000000010000000100000001000000010000000100000001000000
+  - {fileID: 8300000, guid: 84734eefc8549cf40bb1453badd22344, type: 3}
+  groupSizes: 01000000010000000100000001000000010000000100000001000000010000000100000001000000

@@ -13,7 +13,8 @@ public enum Sounds : int
     SCARED_BREATHING,
     KEYS,
     ENGINE_FAIL,
-    HEAVY_BREATHING
+    HEAVY_BREATHING,
+    ENGINE_WIN
 }
 
 public class SoundManager : MonoBehaviour

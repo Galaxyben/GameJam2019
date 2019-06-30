@@ -59,7 +59,8 @@ public class Character_Controller : MonoBehaviour
     private bool isRuning = false;
     private bool isPause = false;
     bool toggleRuning;
-    bool isDead = false;
+    [HideInInspector]
+    public bool isDead = false;
 
     private void Awake() {
         player = ReInput.players.GetPlayer(playerId);
@@ -262,5 +263,28 @@ public class Character_Controller : MonoBehaviour
         {
             cameraStand.transform.localPosition = originalPos;
         }
+    }
+
+    //Animsd
+    private Carro_Script carInvoker;
+
+    public void StartCarFailAnim(Carro_Script _invoker)
+    {
+        anim.enabled = true;
+        anim.SetTrigger("GetToCar");
+        carInvoker = _invoker;
+    }
+    
+    public void OnCarFail()
+    {
+        StaticManager.soundManager.PlaySoundAt(transform.position, Sounds.ENGINE_FAIL);
+        carInvoker.GetOutOfCar();
+        Debug.Log("OnCarFail");
+    }
+
+    public void StartCarOutAnim()
+    {
+        anim.SetTrigger("GetOffCar");
+        anim.enabled = false;
     }
 }
