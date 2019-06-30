@@ -160,20 +160,26 @@ public class Character_Controller : MonoBehaviour
         isDead = true;
         anim.SetTrigger("GetKilled");
 
-        transform.LookAt(new Vector3(_cowPos.x, transform.position.y, _cowPos.z));
+        //transform.LookAt(new Vector3(_cowPos.x, transform.position.y, _cowPos.z));
 
-        /*//Calculating rot
-        float a = 1.0f;
-        float b = (cowPosition - transform.position).magnitude;
-        float c = (cowPosition - (transform.forward + transform.position)).magnitude;
-
+        //Calculating rot
         Vector3 targetDir = _cowPos - transform.position;
         float teta = Vector3.Angle(targetDir, transform.forward);
 
         Debug.Log(teta);
         Vector3 rotDir;
 
-        iTween.RotateAdd(gameObject, Quaternion.LookRotation(_cowPos - transform.position, Vector3.up).eulerAngles, timeToTurn);*/
+        float product1 = Vector3.Dot(targetDir, transform.right);
+
+        if (product1 > 0)
+            rotDir = Vector3.up;
+        else
+            rotDir = Vector3.down;
+
+        Debug.Log("Teta: " + teta + " angle: " + rotDir);
+        //Debug.Break();
+
+        iTween.RotateAdd(gameObject, rotDir * teta, timeToTurn);
     }
 
     private void OnTriggerEnter(Collider other) 
