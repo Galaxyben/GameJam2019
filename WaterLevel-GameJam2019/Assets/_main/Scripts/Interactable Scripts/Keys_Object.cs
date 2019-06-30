@@ -13,6 +13,7 @@ public class Keys_Object : Objetos_Script
         {
             ZoneTrigger.SetActive(true);
             player.actualState = Items.LLAVERO;
+            StaticManager.soundManager.PlaySoundAt(transform.position, Sounds.KEYS);
             Destroy(this.gameObject, 0.4f);
             print("Conseguiste llaves!");
         }

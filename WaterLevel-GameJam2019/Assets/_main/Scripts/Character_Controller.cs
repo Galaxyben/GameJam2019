@@ -119,7 +119,9 @@ public class Character_Controller : MonoBehaviour
         {
 
             moveVector *= moveSpeed;
-            rigi.velocity = ((cameraStand.transform.right * moveVector.x) + (transform.forward * moveVector.z) + (Vector3.up * rigi.velocity.y)) * (toggleRuning ? 2.0f : 1.0f);
+            //rigi.velocity = ((cameraStand.transform.right * moveVector.x) + (transform.forward * moveVector.z) + (Vector3.up * rigi.velocity.y)) * (toggleRuning ? 2.0f : 1.0f);
+            Vector3 finalVel = (cameraStand.transform.right * moveVector.x + cameraStand.transform.forward * moveVector.z) * (toggleRuning ? 2.0f : 1.0f);
+            rigi.velocity = new Vector3(finalVel.x, rigi.velocity.y, finalVel.z);
             if (shakeDuration > 0)
             {
                 cameraStand.transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
@@ -194,6 +196,8 @@ public class Character_Controller : MonoBehaviour
 
     public void Die(Vector3 _cowPos)
     {
+        anim.enabled = true;
+
         if (isDead)
             return;
 
@@ -227,12 +231,14 @@ public class Character_Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        interatuable = other.gameObject;
+        if (other.CompareTag("Interactable"))
+            interatuable = other.gameObject;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        interatuable = null;
+        if (other.CompareTag("Interactable"))
+            interatuable = null;
     }
 
     void HeadBob()
