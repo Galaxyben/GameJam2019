@@ -7,7 +7,13 @@ public enum Sounds : int
 {
     STEP_DIRT,
     STEP_WHEAT,
-    STEP_GRASS
+    STEP_GRASS,
+    COW_ANGRY,
+    COW_BREATH,
+    SCARED_BREATHING,
+    KEYS,
+    ENGINE_FAIL,
+    HEAVY_BREATHING
 }
 
 public class SoundManager : MonoBehaviour
@@ -28,6 +34,7 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         PoolManager.PreSpawn(audioDad, clips.clips.Count * 15, true);
+        PlaySoundGlobal(mainMenu, 0.6f);
     }
 
     public void PlaySoundAt(Vector3 pos, AudioClip clip)
@@ -44,10 +51,11 @@ public class SoundManager : MonoBehaviour
         temp.Play();
     }
 
-    public void PlaySoundGlobal(AudioClip clip)
+    public void PlaySoundGlobal(AudioClip clip, float volume = 1f)
     {
         Transform sound = PoolManager.SpawnWithClip(audioDad, cam.transform.position, Quaternion.identity, clip, cam.transform);
         AudioSource temp = sound.GetComponent<AudioSource>();
+        temp.volume = volume;
         temp.Play();
     }
 

@@ -10,4 +10,9 @@ public class CowAnimEvents : MonoBehaviour
     {
         behaviour.canMove = true;
     }
+
+    public void OnCowSpawn()
+    {
+        StaticManager.soundManager.PlaySoundAt(transform.position, Sounds.COW_ANGRY);
+    }
 }

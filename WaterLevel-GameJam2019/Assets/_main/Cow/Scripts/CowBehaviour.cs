@@ -51,7 +51,6 @@ public class CowBehaviour : MonoBehaviour
         if (willFollowPlayer && player != null && canMove)
         {
             anim.SetBool("Walking", true);
-            transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
             if (Vector3.Distance(transform.position, player.transform.position) > followDistanceLimit)
             {
                 agent.destination = player.transform.position;
