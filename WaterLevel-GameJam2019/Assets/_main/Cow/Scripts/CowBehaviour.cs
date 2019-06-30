@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class CowBehaviour : MonoBehaviour
 {
+    public Animator anim;
     public NavMeshAgent agent;
     public float followSpeed;
     public float followDistanceLimit;
@@ -46,6 +47,7 @@ public class CowBehaviour : MonoBehaviour
     {
         if (willFollowPlayer && player != null)
         {
+            anim.SetBool("Walking", true);
             transform.LookAt(player.transform);
             if (Vector3.Distance(transform.position, player.transform.position) > followDistanceLimit)
             {
