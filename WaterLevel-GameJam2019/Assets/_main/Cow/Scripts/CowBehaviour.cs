@@ -10,6 +10,7 @@ public class CowBehaviour : MonoBehaviour
     public float followSpeed;
     public float followDistanceLimit;
     public float lifetime;
+    public bool canMove = false;
 
     private GameObject player;
 
@@ -47,7 +48,7 @@ public class CowBehaviour : MonoBehaviour
 
     private void FollowPlayer()
     {
-        if (willFollowPlayer && player != null && !goalAchieved)
+        if (willFollowPlayer && player != null && canMove)
         {
             anim.SetBool("Walking", true);
             transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
@@ -65,7 +66,7 @@ public class CowBehaviour : MonoBehaviour
 
     private void KillPlayer()
     {
-        goalAchieved = true;
+        canMove = false;
         anim.SetTrigger("Attack");
         player.GetComponent<Character_Controller>().Die(transform.position);
     }
