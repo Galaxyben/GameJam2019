@@ -49,6 +49,7 @@ public class Character_Controller : MonoBehaviour
     private Quaternion cameraRot;
     private float timeOfDeath;
     private bool isRuning = false;
+    private bool isPause = false;
     bool toggleRuning;
     bool isDead = false;
 
@@ -79,6 +80,7 @@ public class Character_Controller : MonoBehaviour
         viewVector.x = player.GetAxis("View Horizontal");
         viewVector.y = player.GetAxis("View Vertical");
         isRuning = player.GetButton("Running");
+        isPause = player.GetButtonDown("Pause");
     }
 
     private void ProcessInput()
@@ -88,6 +90,13 @@ public class Character_Controller : MonoBehaviour
         if(isRuning)
         {
             toggleRuning = true;
+        }
+        if(isPause)
+        {
+            if (StaticManager.gameStateManager.currentState == GameState.GAMEPLAY)
+                StaticManager.gameStateManager.SetPause();
+            else if(StaticManager.gameStateManager.currentState == GameState.PAUSE)
+                StaticManager.gameStateManager.SetPlay();
         }
         if(moveVector.x != 0.0f || moveVector.z != 0.0f)
         {
