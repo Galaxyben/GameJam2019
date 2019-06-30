@@ -105,8 +105,8 @@ public class Character_Controller : MonoBehaviour
         {
 
             moveVector *= moveSpeed;
-            rigi.velocity = ((cameraStand.transform.right * moveVector.x) + (Vector3.Cross(cameraStand.transform.right, Vector3.up) * moveVector.z) + (Vector3.up * rigi.velocity.y)) * (toggleRuning ? 2.0f : 1.0f);
-            /*if (shakeDuration > 0)
+            rigi.velocity = ((cameraStand.transform.right * moveVector.x) + (transform.forward * moveVector.z) + (Vector3.up * rigi.velocity.y)) * (toggleRuning ? 2.0f : 1.0f);
+            if (shakeDuration > 0)
             {
                 cameraStand.transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 
@@ -116,7 +116,7 @@ public class Character_Controller : MonoBehaviour
             {
                 shakeDuration = 0.5f;
                 cameraStand.transform.localPosition = originalPos;
-            }*/
+            }
 
             HeadBob();
         }
@@ -163,6 +163,8 @@ public class Character_Controller : MonoBehaviour
     {
         if (isDead)
             return;
+
+        StaticManager.gameStateManager.SetLose();
 
         rigi.constraints = RigidbodyConstraints.FreezeAll;
         isDead = true;

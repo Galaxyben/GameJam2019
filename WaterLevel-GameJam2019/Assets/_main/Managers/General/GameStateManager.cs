@@ -23,6 +23,7 @@ public class GameStateManager : MonoBehaviour
     public PostProcessVolume volume;
     public PostProcessProfile baseProfile;
     public PostProcessProfile pauseProfile;
+    public PostProcessProfile deathProfile;
 
     private void Awake()
     {
@@ -59,7 +60,9 @@ public class GameStateManager : MonoBehaviour
 
     public void SetLose()
     {
+        Debug.Log("Set Lose");
         currentState = GameState.LOSE;
+        volume.profile = deathProfile;
         Time.timeScale = 1.0f;
     }
 
