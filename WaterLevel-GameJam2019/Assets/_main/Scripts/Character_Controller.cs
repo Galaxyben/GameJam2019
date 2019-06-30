@@ -32,7 +32,6 @@ public class Character_Controller : MonoBehaviour
     private float previousX = 0, previousY = 0;
     private float headBobT;
     private int headBobEndState = 0;
-    private Vector3 cowPosition;
 
     Vector3 originalPos;
 
@@ -143,17 +142,22 @@ public class Character_Controller : MonoBehaviour
     {
         Debug.Log("Got killed");
         isDead = true;
-        cowPosition = _cowPos;
         anim.SetTrigger("GetKilled");
 
-        //Calculating rot
+        transform.LookAt(new Vector3(_cowPos.x, transform.position.y, _cowPos.z));
+
+        /*//Calculating rot
         float a = 1.0f;
         float b = (cowPosition - transform.position).magnitude;
         float c = (cowPosition - (transform.forward + transform.position)).magnitude;
 
-        float teta = Mathf.Rad2Deg * Mathf.Acos((a * a + b * b - c * c) / (2f * a * b));
+        Vector3 targetDir = _cowPos - transform.position;
+        float teta = Vector3.Angle(targetDir, transform.forward);
 
-        iTween.RotateTo(gameObject, transform.rotation.eulerAngles + Vector3.up * teta, timeToTurn);
+        Debug.Log(teta);
+        Vector3 rotDir;
+
+        iTween.RotateAdd(gameObject, Quaternion.LookRotation(_cowPos - transform.position, Vector3.up).eulerAngles, timeToTurn);*/
     }
 
     private void OnTriggerEnter(Collider other) 
