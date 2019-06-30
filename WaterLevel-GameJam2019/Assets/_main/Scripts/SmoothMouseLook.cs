@@ -37,8 +37,6 @@ public class SmoothMouseLook : MonoBehaviour
         rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
         rotationX += Input.GetAxis("Mouse X") * sensitivityX;
 
-        Debug.Log("X Axis: " + Input.GetAxis("Mouse X") + ", Y Axis " + Input.GetAxis("Mouse Y"));
-
         rotationY = ClampAngle(rotationY, minimumY, maximumY);
         rotationX = ClampAngle(rotationX, minimumX, maximumX);
 

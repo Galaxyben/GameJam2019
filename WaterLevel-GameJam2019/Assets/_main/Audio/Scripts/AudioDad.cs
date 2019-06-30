@@ -19,8 +19,7 @@ public class AudioDad : MonoBehaviour
 
     //When pool despawns this
     void OnDespawn()
-    {
-        Debug.Log("OnDespawn");
+    { 
         audioSource.Stop();
     }
 }

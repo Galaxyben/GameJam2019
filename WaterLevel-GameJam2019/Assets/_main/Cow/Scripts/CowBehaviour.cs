@@ -15,6 +15,8 @@ public class CowBehaviour : MonoBehaviour
 
     private bool willFollowPlayer = true;
 
+    private bool goalAchieved = false;
+
     public void SetCowStats(float _speed, float _lifetime, float _followDistanceLimit)
     {
         followSpeed = _speed;
@@ -45,22 +47,27 @@ public class CowBehaviour : MonoBehaviour
 
     private void FollowPlayer()
     {
-        if (willFollowPlayer && player != null)
+        if (willFollowPlayer && player != null && !goalAchieved)
         {
             anim.SetBool("Walking", true);
-            transform.LookAt(player.transform);
+            transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
             if (Vector3.Distance(transform.position, player.transform.position) > followDistanceLimit)
             {
                 agent.destination = player.transform.position;
             }
             else
+            {
                 KillPlayer();
+            }
+
         }
     }
 
     private void KillPlayer()
     {
-        Destroy(player);
+        goalAchieved = true;
+        anim.SetTrigger("Attack");
+        player.GetComponent<Character_Controller>().Die(transform.position);
     }
 
     private void Start()

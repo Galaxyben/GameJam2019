@@ -15,6 +15,7 @@ public class Character_Controller : MonoBehaviour
 {   
     public Items actualState;
     public bool debugMode = false;
+    public Animator anim;
     public GameObject interatuable;
     public Rigidbody rigi;
     public Camera camara;
@@ -23,12 +24,15 @@ public class Character_Controller : MonoBehaviour
     public float velocidadRotacionMax = 3.0f;
     public float velocidadRotacionMin = -3.0f;
 
+    [Header("Animation settings")]
+    public float timeToTurn = 0.433f;
     public float headBobAmplitude = 0.5f;
     public float headBobSpeed = 1.0f;
 
     private float previousX = 0, previousY = 0;
     private float headBobT;
     private int headBobEndState = 0;
+    private Vector3 cowPosition;
 
     Vector3 originalPos;
 
@@ -44,8 +48,10 @@ public class Character_Controller : MonoBehaviour
     private Vector3 viewVector;
     private Quaternion characterRot;
     private Quaternion cameraRot;
+    private float timeOfDeath;
     private bool isRuning = false;
     bool toggleRuning;
+    bool isDead = false;
 
     private void Awake() {
         player = ReInput.players.GetPlayer(playerId);
@@ -59,8 +65,12 @@ public class Character_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInput();
-        ProcessInput();
+
+        if (!isDead)
+        {
+            GetInput();
+            ProcessInput();
+        }
     }
 
     private void GetInput()
@@ -74,6 +84,8 @@ public class Character_Controller : MonoBehaviour
 
     private void ProcessInput()
     {
+        
+
         if(isRuning)
         {
             toggleRuning = true;
@@ -119,6 +131,29 @@ public class Character_Controller : MonoBehaviour
                 interatuable.SendMessage("CanInteract", actualState, SendMessageOptions.DontRequireReceiver);
             }
         }
+    }
+
+    void RotateTowardsCow()
+    {
+        /*float t = 1-((timeOfDeath + timeToTurn - Time.time)/timeToTurn);
+        Quaternion.Lerp(onDeadRotation, targetRotation, t);*/
+    }
+
+    public void Die(Vector3 _cowPos)
+    {
+        Debug.Log("Got killed");
+        isDead = true;
+        cowPosition = _cowPos;
+        anim.SetTrigger("GetKilled");
+
+        //Calculating rot
+        float a = 1.0f;
+        float b = (cowPosition - transform.position).magnitude;
+        float c = (cowPosition - (transform.forward + transform.position)).magnitude;
+
+        float teta = Mathf.Rad2Deg * Mathf.Acos((a * a + b * b - c * c) / (2f * a * b));
+
+        iTween.RotateTo(gameObject, transform.rotation.eulerAngles + Vector3.up * teta, timeToTurn);
     }
 
     private void OnTriggerEnter(Collider other) 
