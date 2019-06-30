@@ -20,6 +20,8 @@ public class GameStateManager : MonoBehaviour
     public Camera cam;
     public GameObject canvasPauseMenu;
 
+    public Toggle pixelShader;
+
     public PostProcessVolume volume;
     public PostProcessProfile baseProfile;
     public PostProcessProfile pauseProfile;
@@ -50,6 +52,11 @@ public class GameStateManager : MonoBehaviour
         volume.profile = baseProfile;
         canvasPauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
+        if(pixelShader.isOn)
+        {
+            PostEffect post = cam.gameObject.GetComponent<PostEffect>();
+            post.enabled = true;
+        }
     }
 
     public void SetWin()
