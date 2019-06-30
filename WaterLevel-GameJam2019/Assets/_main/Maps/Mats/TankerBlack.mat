@@ -79,7 +79,8 @@ Material:
     - _Mode: 0
     - _NormalPower: 0.5
     - _OcclusionStrength: 1
-    - _OutlinePower: 0
+    - _OutlineGlow: 0
+    - _OutlinePower: 0.01
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -97,5 +98,6 @@ Material:
     - _GlowColor: {r: 1, g: 0, b: 0, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _MainColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
+    - _OutlineColor: {r: 0.17254902, g: 0.050980393, b: 1, a: 1}
     - _ShadowColor: {r: 0.26286048, g: 0.26978338, b: 0.31132078, a: 1}
     - _SpecularColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
