@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DarkMetal
-  m_Shader: {fileID: 4800000, guid: 02d84c1727ab2014aa5ec90d7d1f79b1, type: 3}
+  m_Name: BarnRed 1
+  m_Shader: {fileID: 4800000, guid: b61b245532170b345b1cd8a20d995b81, type: 3}
   m_ShaderKeywords: _LIGHTCOLORFRESNEL_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -43,10 +43,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _EmissionTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -56,8 +52,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 2800000, guid: cb42cd111d036b24db8d9195aac7b365, type: 3}
-        m_Scale: {x: 10, y: 10}
+        m_Texture: {fileID: 2800000, guid: 2edcefa79618616418312b40276fb2ab, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -67,42 +63,30 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ShadowTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _CellShadingBalance: 0.4
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EmissionPannX: 0
-    - _EmissionPannY: 0
-    - _EmissionPower: 0
     - _FresnelPower: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _GlowDirectionPower: 0
     - _GlowIntensity: 0
-    - _MainPannX: 0
-    - _MainPannY: 0
     - _Metallic: 0
     - _Mode: 0
     - _NormalPower: 1
     - _OcclusionStrength: 1
     - _OutlineGlow: 0
     - _OutlinePower: 0.01
-    - _OutlineWidth: 0.02
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpecularIntensity: 0
-    - _SpecularPower: 1
-    - _SpecularSize: 0
+    - _SpecularPower: 3
     - _SrcBlend: 1
-    - _Steps: 2
     - _UVSec: 0
     - _ZWrite: 1
     - _lightColorFresnel: 0.6078432
@@ -112,8 +96,8 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 0.6078432, g: 0.9734884, b: 1, a: 1}
     - _GlowColor: {r: 1, g: 0, b: 0, a: 1}
-    - _LightColor: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 1}
-    - _MainColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadowColor: {r: 0.3363245, g: 0.2171591, b: 0.754717, a: 1}
-    - _SpecularColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+    - _LightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 0.745283, g: 0.010546438, b: 0.010546438, a: 1}
+    - _OutlineColor: {r: 0.17254902, g: 0.050980393, b: 1, a: 1}
+    - _ShadowColor: {r: 0.26286048, g: 0.26978338, b: 0.31132078, a: 1}
+    - _SpecularColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
